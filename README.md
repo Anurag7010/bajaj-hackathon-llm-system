@@ -4,20 +4,20 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-green.svg)](https://fastapi.tiangolo.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## 🎯 Project Overview
+## Project Overview
 
-An intelligent document analysis system that processes PDF/DOCX files and answers questions using LLM-powered query understanding and decision making. Built for the Bajaj Hackathon 2025, this system combines advanced NLP techniques with modern API architecture.
+This project is an intelligent document analysis system built for the **Bajaj Hackathon 2025**. It processes PDF and DOCX files and answers user queries by combining document retrieval with large language model (LLM) reasoning. The system is designed with a modular architecture and provides a RESTful API for integration.
 
-## ✨ Key Features
+## Features
 
-- **📄 Multi-format Document Processing**: Supports PDF and DOCX file analysis
-- **🔍 Vector Similarity Search**: Efficient document chunk retrieval using embeddings
-- **🤖 LLM Integration**: Powered by Google's Gemini API for intelligent responses
-- **🚀 RESTful API**: FastAPI-based with comprehensive error handling
-- **⚡ Production Ready**: Includes monitoring, logging, and performance optimization
-- **🔄 Real-time Processing**: Handles multiple queries simultaneously
+* Support for multiple document formats (PDF, DOCX)
+* Document chunking and vector-based similarity search for efficient retrieval
+* Integration with Google Gemini API for question answering
+* FastAPI backend with clear error handling and validation
+* Real-time query handling with async processing
+* Logging and monitoring for performance tracking
 
-## 🏗️ System Architecture
+## System Architecture
 
 ```
 Input Document → Document Loader → Text Chunking → Vector Store → Query Processing
@@ -25,64 +25,54 @@ Input Document → Document Loader → Text Chunking → Vector Store → Query 
 Response Builder ← Logic Evaluator ← Clause Matcher ← Query Parser
 ```
 
-### Technical Stack
+### Technology Stack
 
-- **Backend**: FastAPI, Pydantic
-- **ML/AI**: Google Gemini API, Sentence Transformers
-- **Document Processing**: PyPDF2, pdfplumber, python-docx
-- **Vector Search**: Custom vector store with cosine similarity
-- **Deployment**: Uvicorn ASGI server
+* **Backend:** FastAPI, Pydantic
+* **ML/NLP:** Google Gemini API, Sentence Transformers
+* **Document Processing:** PyPDF2, pdfplumber, python-docx
+* **Vector Search:** Custom cosine similarity implementation
+* **Deployment:** Uvicorn ASGI server
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
-- Python 3.11 or higher
-- Google Gemini API key
+* Python 3.11 or later
+* Google Gemini API key
 
 ### Installation
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/bajaj-hackathon-llm-system.git
-   cd bajaj-hackathon-llm-system
-   ```
+```bash
+git clone https://github.com/yourusername/bajaj-hackathon-llm-system.git
+cd bajaj-hackathon-llm-system
 
-2. **Create and activate virtual environment**
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: .\venv\Scripts\activate
-   ```
+python -m venv venv
+source venv/bin/activate   # Windows: .\venv\Scripts\activate
 
-3. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
+pip install -r requirements.txt
 
-4. **Configure environment**
-   ```bash
-   cp .env.example .env
-   # Edit .env and add your GEMINI_API_KEY
-   ```
+cp .env.example .env
+# Add your GEMINI_API_KEY in .env
 
-5. **Run the application**
-   ```bash
-   uvicorn app.main:app --reload
-   ```
+uvicorn app.main:app --reload
+```
 
-## 📡 API Usage
+## API Usage
 
 ### Health Check
+
 ```bash
 GET /api/v1/hackrx/health
 ```
 
-### Document Query Processing
+### Document Query
+
 ```bash
 POST /api/v1/hackrx/run
 ```
 
-**Request Format:**
+**Request Example**
+
 ```json
 {
   "documents": "https://example.com/policy.pdf",
@@ -94,7 +84,8 @@ POST /api/v1/hackrx/run
 }
 ```
 
-**Response Format:**
+**Response Example**
+
 ```json
 {
   "answers": [
@@ -105,92 +96,80 @@ POST /api/v1/hackrx/run
 }
 ```
 
-### Testing the API
+### Testing
 
-Run the included test script:
 ```bash
 python test_api.py
 ```
 
-## 🛠️ Project Structure
+## Project Structure
 
 ```
 bajaj-hackathon/
 ├── app/
-│   ├── api/v1/
-│   │   └── endpoints.py         # API route definitions
-│   ├── core/
-│   │   └── config.py           # Configuration settings
-│   ├── models/
-│   │   └── models.py           # Pydantic data models
+│   ├── api/v1/endpoints.py      # API routes
+│   ├── core/config.py           # Settings
+│   ├── models/models.py         # Pydantic models
 │   ├── services/
-│   │   ├── document_loader.py  # Document processing
-│   │   ├── query_parser.py     # Query understanding
-│   │   ├── vector_store.py     # Vector embeddings
-│   │   ├── clause_matcher.py   # Similarity search
-│   │   ├── logic_evaluator.py  # LLM integration
-│   │   └── response_builder.py # Response formatting
+│   │   ├── document_loader.py
+│   │   ├── query_parser.py
+│   │   ├── vector_store.py
+│   │   ├── clause_matcher.py
+│   │   ├── logic_evaluator.py
+│   │   └── response_builder.py
 │   ├── utils/
-│   │   ├── exceptions.py       # Custom exceptions
-│   │   ├── logging_config.py   # Logging setup
-│   │   └── monitoring.py       # Performance monitoring
-│   └── main.py                 # FastAPI application
-├── test_api.py                 # API testing script
-├── requirements.txt            # Python dependencies
-├── .env.example               # Environment template
-├── .gitignore                 # Git ignore rules
-└── README.md                  # Project documentation
+│   │   ├── exceptions.py
+│   │   ├── logging_config.py
+│   │   └── monitoring.py
+│   └── main.py
+├── test_api.py
+├── requirements.txt
+├── .env.example
+├── .gitignore
+└── README.md
 ```
 
-## 🔧 Configuration
+## Configuration
 
-Create a `.env` file with:
+`.env` file should include:
+
 ```env
 GEMINI_API_KEY=your-gemini-api-key-here
 ```
 
-Optional configuration in `app/core/config.py`:
-- `MAX_CHUNK_SIZE`: Text chunk size (default: 1000)
-- `CHUNK_OVERLAP`: Overlap between chunks (default: 200)
-- `TOP_K_RESULTS`: Number of similar chunks to retrieve (default: 5)
+Configurable options in `app/core/config.py`:
 
-## 🧪 Development & Testing
+* `MAX_CHUNK_SIZE` (default: 1000)
+* `CHUNK_OVERLAP` (default: 200)
+* `TOP_K_RESULTS` (default: 5)
 
-### Running Tests
+## Development and Testing
+
 ```bash
+uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 python test_api.py
 ```
 
-### Development Mode
-```bash
-uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
-```
+## Performance
 
-## 📈 Performance Features
+* Caching for faster repeated queries
+* Asynchronous request handling
+* Structured error handling with descriptive messages
+* Logging and monitoring for debugging and analysis
 
-- **Caching**: Global service initialization for optimal performance
-- **Monitoring**: Built-in performance tracking and logging
-- **Error Handling**: Comprehensive exception handling with meaningful messages
-- **Async Processing**: Non-blocking API operations
+## Hackathon Outcomes
 
-## 🏆 Hackathon Achievements
+* Processed complex insurance and policy documents successfully
+* Delivered accurate answers to natural language queries
+* Achieved sub-30 second response time for multiple queries
+* Built with modular, production-ready structure
 
-- ✅ Successfully processes complex policy documents
-- ✅ Accurate question-answering with high confidence scores
-- ✅ Sub-30 second processing time for 5 complex queries
-- ✅ Production-ready architecture with monitoring
-- ✅ Clean, maintainable codebase following best practices
+## License
 
-## 🤝 Contributing
+This project is available under the MIT License. See [LICENSE](LICENSE) for details.
 
-This project was developed for the Bajaj Hackathon 2025. Feel free to fork and enhance!
+## Acknowledgments
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- Bajaj Hackathon 2025 organizers
-- Google Gemini API for LLM capabilities
-- FastAPI and Python ecosystem
+* Bajaj Hackathon 2025 team
+* Google Gemini API
+* FastAPI and the Python open-source community
